@@ -11,6 +11,24 @@ class App extends Component {
       { name: "Rahul", age: 23, designation: "Beggar", id: 3 }
     ]
   }
+  addPerson = (person) => {
+    console.log(person);
+    person.id = Math.random();
+    let newData = [...this.state.data, person];
+    this.setState({
+      data: newData
+    })
+  }
+  deletePerson = (id) => {
+    console.log(id);
+    let newData = this.state.data.filter(person => {
+      return person.id !== id;
+    })
+    this.setState({
+      data: newData
+    })
+
+  }
   render() {
     return (
       <div className="App">
@@ -18,8 +36,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <h1>Welcome in React World!</h1>
-        <SimpleFirst data={ this.state.data } />
-        <AddPerson />
+        <SimpleFirst deletePerson={this.deletePerson} data={this.state.data} />
+        <AddPerson addPerson={this.addPerson} />
       </div>
     );
   }
